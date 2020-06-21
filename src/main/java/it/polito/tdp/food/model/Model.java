@@ -21,10 +21,10 @@ public class Model {
 		this.dao=new FoodDAO();
 		this.idMap= new HashMap<Integer, Food>();
 	}
-	public List<String> getFood() {
-		List<String> cibi= new ArrayList<>();
+	public List<Food> getFood() {
+		List<Food> cibi= new ArrayList<>();
 		for (Food f: idMap.values()) {
-		cibi.add(f.getDisplay_name());	
+		cibi.add(f);	
 		}
 		return cibi;
 	}

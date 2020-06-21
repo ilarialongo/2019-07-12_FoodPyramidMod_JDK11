@@ -40,7 +40,7 @@ public class FXMLController {
     private Button btnSimula;
 
     @FXML
-    private ComboBox<String> boxFood;
+    private ComboBox<Food> boxFood;
 
     @FXML
     private TextArea txtResult;
