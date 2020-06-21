@@ -52,6 +52,7 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	boxFood.getItems().clear();
     	txtResult.clear();
     	int porzioni;
     	try {
