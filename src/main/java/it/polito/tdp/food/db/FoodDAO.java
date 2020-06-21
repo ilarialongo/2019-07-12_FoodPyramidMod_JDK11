@@ -109,4 +109,33 @@ public class FoodDAO {
 		}
 
 	}
+	
+	
+	
+public List<Food> getFoodByPortions (int portions) {
+	String sql= "SELECT f.food_code, f.display_name, COUNT(DISTINCT p.portion_id) as CN " + 
+			"FROM food as f, portion as p " + 
+			"WHERE f.food_code=p.food_code " + 
+			"GROUP BY f.food_code, f.display_name " + 
+			"HAVING CN=?";
+	
+	List<Food> result= new ArrayList<>();
+	try {
+	Connection conn = DBConnect.getConnection() ;
+	PreparedStatement st = conn.prepareStatement(sql) ;
+	st.setInt(1, portions);
+	ResultSet res = st.executeQuery();
+	while (res.next()) {
+		result.add(new Food(res.getInt("food_code"), res.getString("display_name")));
+		
+	}
+	conn.close();
+	return result;
+	
+	}  catch (SQLException e) {
+		e.printStackTrace();
+		return null ;
+	}
+	
+}
 }

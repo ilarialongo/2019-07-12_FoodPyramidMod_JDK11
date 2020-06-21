@@ -1,8 +1,10 @@
 package it.polito.tdp.food;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.food.model.Food;
 import it.polito.tdp.food.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +41,7 @@ public class FXMLController {
     private Button btnSimula;
 
     @FXML
-    private ComboBox<?> boxFood;
+    private ComboBox<Food> boxFood;
 
     @FXML
     private TextArea txtResult;
@@ -51,7 +53,20 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
-
+    	txtResult.clear();
+    	String porzioni= txtPorzioni.getText();
+    	int portions;
+    	try {
+    		portions=Integer.parseInt(porzioni);
+    		List<Food> cibi= model.getFoods(portions);
+    		boxFood.getItems().clear();
+    		boxFood.getItems().addAll(cibi);
+    	} catch (NumberFormatException ex) {
+    		txtResult.appendText("Inserire numero valido");	
+    		return ;
+    	}
+    	
+  
     }
 
     @FXML
