@@ -117,7 +117,8 @@ public List<Food> getFoodByPortions (int portions) {
 			"FROM food as f, portion as p " + 
 			"WHERE f.food_code=p.food_code " + 
 			"GROUP BY f.food_code, f.display_name " + 
-			"HAVING CN=?";
+			"HAVING CN=? "+
+			"ORDER BY f.display_name ASC";
 	
 	List<Food> result= new ArrayList<>();
 	try {
@@ -137,5 +138,33 @@ public List<Food> getFoodByPortions (int portions) {
 		return null ;
 	}
 	
+}
+
+public Double calorieCongiunte(Food f1, Food f2) {
+	String sql= "SELECT f1.food_code, f2.food_code, AVG (c.condiment_calories) as cal " + 
+			"FROM food_condiment as f1, food_condiment as f2, condiment as c " + 
+			"WHERE f1.condiment_code=f2.condiment_code AND f1.condiment_code=c.condiment_code " + 
+			"AND f1.id<>f2.id " + 
+			"AND f1.food_code=? " + 
+			"AND f2.food_code=? " + 
+			"GROUP BY f1.food_code, f2.food_code";
+	try {
+		Connection conn = DBConnect.getConnection() ;
+		PreparedStatement st = conn.prepareStatement(sql);
+		st.setInt(1, f1.getFood_code());
+		st.setInt(2, f2.getFood_code());
+		ResultSet res = st.executeQuery();
+		Double calories= null;
+		if (res.first()) {
+			calories= res.getDouble("cal");	
+		}
+		conn.close();
+		return calories;
+		
+		}  catch (SQLException e) {
+			e.printStackTrace();
+			return null ;
+		}
+
 }
 }
