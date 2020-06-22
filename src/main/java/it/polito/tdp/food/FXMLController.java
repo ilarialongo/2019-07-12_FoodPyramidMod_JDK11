@@ -78,6 +78,8 @@ public class FXMLController {
     		txtResult.appendText("Inserire numero valido");	
     		return ;
     	}
+    	this.model.getFoods(portions);
+    	txtResult.appendText(String.format("%d vertici %d archi", this.model.vertici(), this.model.archi()));
     	
   
     }

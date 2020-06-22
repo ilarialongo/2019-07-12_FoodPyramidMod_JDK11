@@ -50,5 +50,13 @@ public class Model {
 		Collections.sort(result);
 		return result;	
 	}
+	
+	public int vertici() {
+		return this.grafo.vertexSet().size();
+	}
+	
+	public int archi() {
+		return this.grafo.edgeSet().size();
+	}
 
 }
