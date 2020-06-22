@@ -19,7 +19,7 @@ public class Model {
 	private List<Adiacenza> adiacenze;
 	public Model() {
 		this.dao=new FoodDAO();
-		this.idMap= new HashMap<Integer, Food>();
+		
 	}
 	public List<Food> getFood() {
 		List<Food> cibi= new ArrayList<>();
@@ -30,8 +30,10 @@ public class Model {
 	}
 	
 	public void creaGrafo(int porzioni) {
-		this.dao.getCibiSelezionati(porzioni, this.idMap);
+		
 		this.grafo= new SimpleWeightedGraph<Food,DefaultWeightedEdge>(DefaultWeightedEdge.class);
+		this.idMap= new HashMap<Integer, Food>();
+		this.dao.getCibiSelezionati(porzioni, this.idMap);
 		this.adiacenze= this.dao.getAdiacenze();
 		for (Food f: idMap.values()) {
 			this.grafo.addVertex(f);
