@@ -58,5 +58,14 @@ public class Model {
 	public int archi() {
 		return this.grafo.edgeSet().size();
 	}
+	
+	public String simula(Food cibo, int k) {
+		Simulatore sim=new Simulatore(this.grafo, this);
+		sim.setK(k);
+		sim.init(cibo);
+		sim.run();
+		String messaggio= String.format("Preparati %d cibi in %f minuti \n", sim.getCibiPreparati(), sim.getTempoPreparazione());
+		return messaggio;
+	}
 
 }
