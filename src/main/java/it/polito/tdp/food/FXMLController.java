@@ -64,8 +64,7 @@ public class FXMLController {
     	this.model.creaGrafo(porzioni);
     	this.boxFood.getItems().addAll(this.model.getFood());
     	txtResult.appendText(String.format("Grafo creato con %d vertici, %d archi", this.model.vertici(), this.model.archi()));
-    	
-
+  
     }
 
     @FXML
